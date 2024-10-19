@@ -1,0 +1,36 @@
+
+.header {
+  background-color: var(--header-bg);
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.homeLink {
+  color: var(--link-color);
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.homeLink:hover {
+  color: var(--link-hover-color);
+}
+
+.themeToggle {
+  background-color: var(--button-bg);
+  color: var(--button-color);
+  border: none;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.themeToggle:hover {
+  background-color: var(--button-hover-bg);
+}

@@ -40,3 +40,71 @@ a {
     color-scheme: dark;
   }
 }
+
+
+body.dark p{
+  color: #fff;
+}
+
+body.light {
+  /* General Background Color */
+  background-color: #fff;
+  --background: #fff;
+
+  /* header on each page*/
+  --heading-color: #333;
+  --link-color: black;
+  --link-hover-color: #2c7;
+  
+  /* Buttons */
+  --button-bg: #ddd;
+  --button-color: #333;
+  --button-text-color: #333;
+  --button-hover-bg: #bbb;
+
+  /* Books */
+  --booklist-bg: #fff;
+  --card-bg: #fff;
+  --title-color: #333;
+  --text-color: #555;
+  --description-color: #666;
+  --price-color: #2c7;
+  --rating-color: #ff9800;
+
+  /* Authors */
+  --item-bg: #f5f5f5;
+  --item-text-color: #2c3e50;
+  --item-hover-bg: #e0e0e0;
+}
+
+body.dark {
+  /* General Background Color */
+  background-color: #333;
+  --background: #333;
+
+  /* Header on Each Page*/
+  --heading-color: #fff;
+  --link-color: #fff;
+  --link-hover-color: #2c7;
+
+   /* Buttons */
+  --button-bg: #444;
+  --button-color: #fff;
+  --button-text-color: #fff;
+  --button-hover-bg: #333;
+
+  
+  /* Books */
+  --booklist-bg: #333;
+  --card-bg: #3a3a3a;
+  --title-color: #e0e0e0;
+  --text-color: #ccc;
+  --description-color: #bbb;
+  --price-color: #2c7;
+  --rating-color: #ff9800;
+
+  /* Authors */
+  --item-bg: #3a3a3a;
+  --item-text-color: #e0e0e0;
+  --item-hover-bg: #444;
+}
