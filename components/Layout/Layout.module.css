@@ -1,3 +1,8 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Full height of the viewport */
+}
 
 .header {
   background-color: var(--header-bg);
@@ -5,6 +10,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.main {
+  flex: 1; /* Allow main content to grow and take available space */
+  padding: 20px; /* Add some padding to the main content */
 }
 
 .homeLink {
@@ -33,4 +42,32 @@
 
 .themeToggle:hover {
   background-color: var(--button-hover-bg);
+}
+
+
+.footer {
+  background-color: var(--background); /* Background color from your theme variables */
+  padding: 20px; /* Padding around the footer content */
+  text-align: center; /* Center text inside the footer */
+}
+
+.footerContent {
+  max-width: 1200px; /* Maximum width for the footer content */
+  margin: 0 auto; /* Center the footer content */
+}
+
+.footerNav {
+  margin-top: 10px; /* Space between footer text and navigation */
+}
+
+.infoLink {
+  margin: 0 15px; /* Margin for spacing between links */
+  text-decoration: none; /* Remove underline from links */
+  color: var(--link-color); /* Link color from your theme variables */
+  transition: color 0.3s; /* Smooth color transition on hover */
+}
+
+.infoLink:hover {
+  color: var(--link-hover-color); /* Change color on hover */
+  text-decoration: underline; /* Underline effect on hover */
 }

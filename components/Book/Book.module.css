@@ -65,89 +65,66 @@
 }
 
 .reviewSection {
-  background-color: var(--booklist-bg);
-  padding: 2rem;
-  border-radius: 0.75rem;
-  margin-top: 2.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease;
+  margin: 2rem auto;
+  max-width: 800px;
+  padding: 0;
 }
 
 .reviewHeading {
-  color: var(--title-color);
+  color: var(--heading-color);
   font-size: 1.75rem;
   margin-bottom: 1.5rem;
-  border-bottom: 2px solid var(--rating-color);
+  border-bottom: 2px solid var(--button-bg);
   padding-bottom: 0.5rem;
-  font-weight: bold;
 }
 
 .reviewList {
   list-style: none;
   padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
 .reviewItem {
-  background-color: var(--item-bg);
+  background-color: var(--card-bg);
   padding: 1.5rem;
-  border-radius: 0.75rem;
-  margin-bottom: 1.5rem;
-  color: var(--item-text-color);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, background-color 0.3s ease;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
 }
 
 .reviewItem:hover {
-  transform: translateY(-3px);
-  background-color: var(--item-hover-bg);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .reviewUser {
-  font-weight: bold;
   color: var(--title-color);
-  margin-bottom: 0.5rem;
-  font-size: 1.2rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin: 0 0 0.75rem 0;
 }
 
 .reviewRating {
   color: var(--rating-color);
-  font-size: 1.1rem;
-  margin: 0.3rem 0;
+  font-weight: 500;
+  margin: 0 0 0.75rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .reviewRating span {
-  font-weight: bold;
+  color: var(--rating-color);
 }
 
 .reviewComment {
-  color: var(--description-color);
-  font-size: 1rem;
+  color: var(--text-color);
+  font-style: italic;
   line-height: 1.5;
-  margin-top: 0.5rem;
-}
-
-@media (max-width: 768px) {
-  .reviewSection {
-    padding: 1.5rem;
-  }
-
-  .reviewItem {
-    padding: 1.2rem;
-  }
-
-  .reviewHeading {
-    font-size: 1.5rem;
-  }
-
-  .reviewUser {
-    font-size: 1.1rem;
-  }
-
-  .reviewRating {
-    font-size: 1rem;
-  }
-
-  .reviewComment {
-    font-size: 0.95rem;
-  }
+  margin: 0;
+  font-size: 0.95rem;
+  padding: 0;
 }

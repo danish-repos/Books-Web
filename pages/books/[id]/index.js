@@ -39,7 +39,7 @@ const BookDetails = (props) => {
 
             <li key={review.id} className={stylingBook.reviewItem}>
               <p className={stylingBook.reviewUser}>{getUsernameById(review.userId)}:</p>
-              <p className={stylingBook.reviewRating}>Rating: <span>{review.rating}</span></p>
+              <p className={stylingBook.reviewRating}>Rating: <span>{review.rating}★</span></p>
               <p className={stylingBook.reviewComment}>"{review.comment}"</p>
             </li>
 
@@ -99,7 +99,5 @@ export async function getStaticPaths(){
   }
 
 }
-
-
 
 export default BookDetails;

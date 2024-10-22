@@ -137,3 +137,23 @@
   text-align: center;
   padding: 1rem;
 }
+
+.text {
+  font-family: Arial, sans-serif; /* Font family */
+  font-size: 16px;               /* Font size */
+  color: var(--item-text-color);                   /* Text color */
+  line-height: 1.5;              /* Line height for readability */
+  margin: 10px 0;                /* Margin for spacing */
+}
+
+.textLink {
+  color: #0070f3;            /* Link color (blue) */
+  text-decoration: none;     /* Remove underline */
+  font-weight: bold;         /* Make text bold */
+  transition: color 0.2s;    /* Smooth transition for hover effect */
+}
+
+.textLink:hover {
+  color: #0056b3;            /* Darker shade on hover */
+  text-decoration: underline; /* Optional underline on hover */
+}

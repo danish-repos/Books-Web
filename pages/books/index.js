@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styling from "@/styles/General.module.css";
 import stylingBook from "@/components/Book/Book.module.css";
 import Book from "@/components/Book/book";
@@ -6,6 +6,8 @@ import { useRouter } from "next/router";
 import { getAllBooks, getAllAuthors, getAllGenres } from "@/helpers/api-util";
 
 const Books = (props) => {
+  const searchedItem = useRef()
+
   const router = useRouter();
   const { genre } = router.query;
 
@@ -82,8 +84,7 @@ const Books = (props) => {
         </select>
 
         <input
-          type="text" className={styling.searchBar} placeholder="Search by title..." value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          type="text" className={styling.searchBar} placeholder="Search by title..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}
         />
 
         <button className={styling.searchButton} onClick={searchBook}>Search</button>
