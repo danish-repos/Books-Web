@@ -36,6 +36,21 @@
   color: var(--button-color, #333); 
 }
 
+.searchButton {
+  padding: 10px;
+  background-color: var(--button-bg);
+  color: var(--button-text-color);
+  border: 1px solid var(--border-color, #ddd);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.searchButton:hover {
+  background-color: var(--button-hover-bg);
+}
+
 
 .Buttons {
   margin-bottom: 10px;
@@ -83,4 +98,42 @@
 
 .genreItem:hover {
   background-color: var(--item-hover-bg); 
+}
+
+/* Updated Recent Searches CSS for Horizontal Layout */
+.recentSearches {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.recentSearches h3 {
+  font-size: 1.2rem;
+  color: var(--heading-color);
+  margin-right: 1rem;
+  text-align: center;
+}
+
+.recentSearches ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.recentSearches li {
+  color: var(--link-color);
+  background-color: var(--item-bg);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-right: 0.5rem;
+}
+
+.recentSearchesContainer {
+  text-align: center;
+  padding: 1rem;
 }

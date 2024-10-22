@@ -11,9 +11,10 @@ export const Book = (props) => {
     <>
 
     <div key={props.details.id} className={stylingBook.bookCard} onClick={props.onClickBook}>
+      
     <div className={stylingBook.bookTitle}>{props.details.title}</div>
     <div className={stylingBook.bookAuthor}>Author Name: {author.name}</div>
-    <div className={stylingBook.bookGenre}>Genre Name: {genre.name}</div>
+    <div className={stylingBook.bookGenre}>Genre: {genre.name}</div>
     <div className={stylingBook.bookDescription}>{props.details.description}</div>
     <div className={stylingBook.bookPrice}>${props.details.price}</div>
     <div className={stylingBook.bookRating}>Rating: {props.details.rating}★</div>

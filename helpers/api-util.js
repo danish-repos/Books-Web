@@ -43,6 +43,51 @@ export async function getAllGenres(){
     })
 }
 
+export async function getAllReviews() {
+  return fetch(
+    "https://books-app-32122-default-rtdb.firebaseio.com/reviews.json"
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      const reviews = [];
+      for (const key in data) {
+        reviews.push({
+          id: key,
+          ...data[key],
+        });
+      }
+      return reviews;
+    });
+}
+
+export async function getAllUsers() {
+  return fetch(
+    "https://books-app-32122-default-rtdb.firebaseio.com/users.json"
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      const users = [];
+      for (const key in data) {
+        users.push({
+          id: key,
+          ...data[key],
+        });
+      }
+      return users;
+    });
+}
+
+export async function getReviewByBookId(id){
+    const reviews = await getAllReviews()
+    return reviews.filter(i=> i.bookId === id)
+}
+
+
+export async function getFeaturedBooks(){
+    const books = await getAllBooks()
+    return books.filter(i=> i.isFeatured)
+}
+
 
 export async function getBookById(id){
     const books = await getAllBooks()
