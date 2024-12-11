@@ -3,6 +3,8 @@ import styling from "../styles/General.module.css";
 import Book from "@/components/Book/book";
 import { useRouter } from "next/router";
 import { getAllAuthors, getAllGenres, getFeaturedBooks } from "@/helpers/api-util";
+import { getSession } from "next-auth/react";
+
 
 export default function Home(props) {
   const router = useRouter();
@@ -35,16 +37,26 @@ export default function Home(props) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps(context) {
+
+  const session = await getSession({ req: context.req });
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth/signin",
+        permanent: false,
+      },
+    };
+  }
+
   const dataBooks = await getFeaturedBooks();
   const dataAuthors = await getAllAuthors();
   const dataGenres = await getAllGenres();
 
   if (!dataBooks || !dataAuthors || !dataGenres) {
     return {
-      redirect: {
-        destination: "/error",
-      },
+      notFound: true 
     };
   }
 

@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import styling from "@/styles/General.module.css";
 import stylingBook from "@/components/Book/Book.module.css";
 import Book from "@/components/Book/book";
 import { useRouter } from "next/router";
 import { getAllBooks, getAllAuthors, getAllGenres } from "@/helpers/api-util";
 
-const Books = (props) => {
-  const searchedItem = useRef()
 
+const Books = (props) => {
   const router = useRouter();
   const { genre } = router.query;
 
@@ -27,11 +26,10 @@ const Books = (props) => {
 
   }, [genre]);
 
-  // when the user changes the genre, it shows all the books of that genre 
   const handleGenreChange = () => {
     const newFilteredBooks = props.books.filter((book) => {
 
-      const genreMatch = selectedGenre ? book.genreId === selectedGenre : true;
+      const genreMatch = selectedGenre ? book.genreId == selectedGenre : true;
       return genreMatch;
 
     });
@@ -39,7 +37,7 @@ const Books = (props) => {
     setSearchTerm("");
   };
 
-  // when the user presses the search button, it should filter the data and add the search into recent searches
+
   const searchBook = () => {
 
     const newFilteredBooks = filteredBooks.filter((book) => {
@@ -55,6 +53,7 @@ const Books = (props) => {
       setRecentSearches(updatedSearches);
       localStorage.setItem("recentSearches", JSON.stringify(updatedSearches));
     }   
+    setSearchTerm("")
 
   }
 
@@ -118,15 +117,14 @@ const Books = (props) => {
 }
 
 export async function getStaticProps() {
+
   const dataBooks = await getAllBooks();
   const dataAuthors = await getAllAuthors();
   const dataGenres = await getAllGenres();
 
   if (!dataBooks || !dataAuthors || !dataGenres) {
     return {
-      redirect: {
-        destination: "/error",
-      },
+      notFound:true
     };
   }
 

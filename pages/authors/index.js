@@ -15,6 +15,7 @@ const AuthorsPage = () => {
         const authors=[]
         for(const key in data)
         {
+            console.log(key)
             authors.push({
                 id:key,
                 ...data[key]

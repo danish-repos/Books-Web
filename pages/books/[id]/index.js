@@ -52,7 +52,7 @@ const BookDetails = (props) => {
 }
 
 
-export async function getStaticProps(context){
+export async function getServerSideProps(context){
 
   const dataBooks = await getBookById(context.params.id)
 
@@ -77,27 +77,11 @@ export async function getStaticProps(context){
       authors:dataAuthors,
       genres:dataGenres,
       users:dataUsers,
-      review:dataReview
+      review:dataReview || []
     },
 
-    revalidate : 30
   }
 }
 
-
-
-export async function getStaticPaths(){
-
-  const books = await getAllBooks()
-
-  const idBooks = books.map (val => val.id)
-  const pathsBooks = idBooks.map(i => ({params : {id: i}}))
-
-  return {
-    paths: pathsBooks,
-    fallback : false
-  }
-
-}
 
 export default BookDetails;

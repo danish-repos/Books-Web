@@ -1,100 +1,154 @@
 export async function getAllBooks(){
-    return fetch('https://books-app-32122-default-rtdb.firebaseio.com/books.json').then(res=>res.json()).then(data=>{
-        
-    const books=[]
-        for(const key in data)
-        {
-            books.push({
-                id:key,
-                ...data[key]
-            })
-        }
-        return books
-    })
+
+  try {
+    const response = await fetch('http://localhost:3000/api/books');
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status} ${response.statusText}`);
+    }
+
+    const books = await response.json();
+    return books;
+
+  } catch (error) {
+    console.error('Failed to fetch books:', error);
+
+  }
 }
 
 export async function getAllAuthors(){
-    return fetch('https://books-app-32122-default-rtdb.firebaseio.com/authors.json').then(res=>res.json()).then(data=>{
-        
-    const authors=[]
-        for(const key in data)
-        {
-            authors.push({
-                id:key,
-                ...data[key]
-            })
-        }
-        return authors
-    })
+  try {
+    const response = await fetch('http://localhost:3000/api/authors');
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status} ${response.statusText}`);
+    }
+
+    const books = await response.json();
+    return books;
+
+  } catch (error) {
+    console.error('Failed to fetch books:', error);
+
+  }
 }
 
 export async function getAllGenres(){
-    return fetch('https://books-app-32122-default-rtdb.firebaseio.com/genres.json').then(res=>res.json()).then(data=>{
-        
-    const genres=[]
-        for(const key in data)
-        {
-            genres.push({
-                id:key,
-                ...data[key]
-            })
-        }
-        return genres
-    })
+  try {
+    const response = await fetch('http://localhost:3000/api/genres');
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status} ${response.statusText}`);
+    }
+
+    const books = await response.json();
+    return books;
+
+  } catch (error) {
+    console.error('Failed to fetch books:', error);
+
+  }
 }
 
 export async function getAllReviews() {
-  return fetch(
-    "https://books-app-32122-default-rtdb.firebaseio.com/reviews.json"
-  )
-    .then((res) => res.json())
-    .then((data) => {
-      const reviews = [];
-      for (const key in data) {
-        reviews.push({
-          id: key,
-          ...data[key],
-        });
-      }
-      return reviews;
-    });
+  try {
+    const response = await fetch('http://localhost:3000/api/reviews');
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status} ${response.statusText}`);
+    }
+
+    const books = await response.json();
+    return books;
+
+  } catch (error) {
+    console.error('Failed to fetch books:', error);
+
+  }
 }
 
 export async function getAllUsers() {
-  return fetch(
-    "https://books-app-32122-default-rtdb.firebaseio.com/users.json"
-  )
-    .then((res) => res.json())
-    .then((data) => {
-      const users = [];
-      for (const key in data) {
-        users.push({
-          id: key,
-          ...data[key],
-        });
-      }
-      return users;
-    });
+  try {
+    const response = await fetch('http://localhost:3000/api/users');
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status} ${response.statusText}`);
+    }
+
+    const books = await response.json();
+    return books;
+
+  } catch (error) {
+    console.error('Failed to fetch books:', error);
+
+  }
 }
-
-export async function getReviewByBookId(id){
-    const reviews = await getAllReviews()
-    return reviews.filter(i=> i.bookId === id)
-}
-
-
-export async function getFeaturedBooks(){
-    const books = await getAllBooks()
-    return books.filter(i=> i.isFeatured)
-}
-
 
 export async function getBookById(id){
-    const books = await getAllBooks()
-    return books.find((i) => i.id === id)
+  try {
+    const response = await fetch(`http://localhost:3000/api/books/${id}`);
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status} ${response.statusText}`);
+    }
+
+    const book = await response.json();
+    return book;
+  } catch (error) {
+    console.error(`Failed to fetch book with ID ${id}:`, error);
+  }
+}
+
+export async function getBooksByGenreId(id) {
+  try {
+    const response = await fetch(`http://localhost:3000/api/genres/${id}/books`);
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status} ${response.statusText}`);
+    }
+
+    const books = await response.json();
+    return books;
+  } catch (error) {
+    console.error(`Failed to fetch books for genre ID ${id}:`, error);
+  }
 }
 
 export async function getAuthorById(id){
-    const authors = await getAllAuthors()
-    return authors.find((i) => i.id === id)
+  try {
+    const response = await fetch(`http://localhost:3000/api/authors/${id}`);
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status} ${response.statusText}`);
+    }
+
+    const author = await response.json();
+    return author;
+  } catch (error) {
+    console.error(`Failed to fetch author with ID ${id}:`, error);
+  }
+}
+
+export async function getReviewByBookId(id){
+  try {
+    const response = await fetch(`http://localhost:3000/api/reviews/${id}/books`);
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status} ${response.statusText}`);
+    }
+
+    const reviews = await response.json();
+    return reviews;
+  } catch (error) {
+    console.error(`Failed to fetch reviews for book ID ${id}:`, error);
+  }
+}
+
+export async function getFeaturedBooks(){
+  try {
+    const books = await getAllBooks();
+    return books.filter(i => i.isFeatured);
+  } catch (error) {
+    console.error('Failed to fetch featured books:', error);
+  }
 }

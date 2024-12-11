@@ -55,7 +55,7 @@ body.light {
   --heading-color: #333;
   --link-color: black;
   --link-hover-color: #2c7;
-  
+    
   /* Buttons */
   --button-bg: #ddd;
   --button-color: #333;
@@ -108,3 +108,4 @@ body.dark {
   --item-text-color: #e0e0e0;
   --item-hover-bg: #444;
 }
+
