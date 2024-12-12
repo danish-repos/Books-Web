@@ -2,9 +2,11 @@ import React from 'react'
 import Book from '@/components/Book/book';
 import styles from '@/styles/General.module.css';
 import stylingBook from '@/components/Book/Book.module.css'
-import { getBookById, getAllAuthors, getAllGenres, getAllBooks, getAllUsers, getReviewByBookId } from '@/helpers/api-util';
+import { getBookById, getAllAuthors, getAllGenres, getAllUsers, getReviewByBookId } from '@/helpers/api-util';
 import { useRouter } from 'next/router';
+import { getSession } from 'next-auth/react';
 
+// '/books/[id]' page (shows a single books with his reviews)
 const BookDetails = (props) => {
   const router = useRouter()
   
@@ -16,6 +18,15 @@ const BookDetails = (props) => {
   const getUsernameById = (userId) => {
     const user = props.users.find((user) => user.id === userId);
     return user ? user.username : 'Unknown User';
+  }
+
+  if (!props.session) {
+    return (
+      <div>
+        <header className={styles.heading}>Book Details</header>
+        <p>You need to be logged in to view this page.</p>
+      </div>
+    );
   }
   
   return (
@@ -53,6 +64,16 @@ const BookDetails = (props) => {
 
 
 export async function getServerSideProps(context){
+  // Restrict access to only logged-in users
+  const session = await getSession({ req: context.req });
+
+  if (!session) {
+    return {
+      props: {
+        session: null,
+      },
+    };
+  }
 
   const dataBooks = await getBookById(context.params.id)
 
@@ -77,7 +98,8 @@ export async function getServerSideProps(context){
       authors:dataAuthors,
       genres:dataGenres,
       users:dataUsers,
-      review:dataReview || []
+      review:dataReview || [],
+      session
     },
 
   }

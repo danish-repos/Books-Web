@@ -1,5 +1,6 @@
 import { connectToDatabase } from '../../../helpers/db';
 
+// '/api/genres' api (Fetching all the genres)
 export default async function handler(req, res) {
     
   if (req.method !== 'GET') {

@@ -1,5 +1,6 @@
 import { connectToDatabase } from '../../../helpers/db';
 
+// '/api/authors' api (Fetching all the authors)
 export default async function handler(req, res) {
     
   if (req.method !== 'GET') {
@@ -8,9 +9,9 @@ export default async function handler(req, res) {
 
   try {
     const { db } = await connectToDatabase();
-    const books = await db.collection('authors').find({}).toArray();
+    const authors = await db.collection('authors').find({}).toArray();
     
-    res.status(200).json(books);
+    res.status(200).json(authors);
 
   } catch (error) {
     console.error('Error fetching books:', error);

@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from '@/styles/General.module.css'
 
+// '/info' page
 const Info = () => {
   return (
     <div>

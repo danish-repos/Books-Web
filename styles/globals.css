@@ -52,7 +52,7 @@ body.light {
   --background: #fff;
 
   /* header on each page*/
-  --heading-color: #333;
+  --heading-color: black;
   --link-color: black;
   --link-hover-color: #2c7;
     

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { getAllGenres } from '@/helpers/api-util';
 
 
-
+// '/gneres' page (shows all the genres)
 const GenrePage = (props) => {
 
   const router = useRouter()

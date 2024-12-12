@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './NotFound.module.css';
 import Link from 'next/link';
 
+// '/404' page (A custom error page)
 const NotFound = () => {
     return (
         <div className={styles.container}>

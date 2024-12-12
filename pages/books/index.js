@@ -4,11 +4,14 @@ import stylingBook from "@/components/Book/Book.module.css";
 import Book from "@/components/Book/book";
 import { useRouter } from "next/router";
 import { getAllBooks, getAllAuthors, getAllGenres } from "@/helpers/api-util";
+import { useSession } from "next-auth/react"; 
 
-
+// '/books' page (shows all the books)
 const Books = (props) => {
   const router = useRouter();
   const { genre } = router.query;
+
+  const { data: session, status } = useSession();
 
   const [selectedGenre, setSelectedGenre] = useState(genre || "");
   const [searchTerm, setSearchTerm] = useState("");
@@ -21,11 +24,36 @@ const Books = (props) => {
       setSearchTerm("");
     }
 
-    const storedSearches = JSON.parse(localStorage.getItem("recentSearches")) || [];
-    setRecentSearches(storedSearches);
+    if (session) {
+      fetchRecentSearches();
+    }
 
-  }, [genre]);
+  }, [genre, session]);
 
+  // Fetching the user history
+  const fetchRecentSearches = async () => {
+    try {
+      const response = await fetch("/api/users/history", {
+        method: "GET",
+        headers: {
+          "Authorization": `Bearer ${session?.accessToken}`, 
+        },
+      });
+
+      if (response.ok) {
+
+        const data = await response.json();
+        setRecentSearches(data); 
+        
+      } else {
+        console.error("Failed to fetch recent searches.");
+      }
+    } catch (error) {
+      console.error("Error fetching recent searches:", error);
+    }
+  };
+
+  // Filtering thorugh the genre
   const handleGenreChange = () => {
     const newFilteredBooks = props.books.filter((book) => {
 
@@ -38,7 +66,8 @@ const Books = (props) => {
   };
 
 
-  const searchBook = () => {
+  // Handles the serach bar
+  const searchBook = async () => {
 
     const newFilteredBooks = filteredBooks.filter((book) => {
 
@@ -49,13 +78,39 @@ const Books = (props) => {
     setFilteredBooks(newFilteredBooks);
 
     if(searchTerm){
+      if (session) {
+        await addSearchQueryToDatabase(searchTerm);
+      }
+
       const updatedSearches = [...recentSearches, searchTerm].slice(-5);
       setRecentSearches(updatedSearches);
-      localStorage.setItem("recentSearches", JSON.stringify(updatedSearches));
+      
     }   
     setSearchTerm("")
 
   }
+
+  // Update the search history of a logged-in user
+  const addSearchQueryToDatabase = async (query) => {
+    try {
+      const response = await fetch("/api/users/history", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${session?.accessToken}`, 
+        },
+        body: JSON.stringify({ query }),
+      });
+
+      if (response.ok) {
+        console.log("Search query added to history");
+      } else {
+        console.error("Failed to add search query to history.");
+      }
+    } catch (error) {
+      console.error("Error adding search query to database:", error);
+    }
+  };
 
   const bookClick = (id) => {
     router.push("/books/" + id);
@@ -89,18 +144,18 @@ const Books = (props) => {
         <button className={styling.searchButton} onClick={searchBook}>Search</button>
       </div>
 
-      <div className={styling.recentSearchesContainer}>
-
-        <div className={styling.recentSearches}>
-          <h3>Recent Searches</h3>
-
-          <ul>
-            {recentSearches.map((term) => (<li key={term}>{term}</li>))}
-          </ul>
-
+      {session && (
+        <div className={styling.recentSearchesContainer}>
+          <div className={styling.recentSearches}>
+            <h3>Recent Searches</h3>
+            <ul>
+              {recentSearches.map((term, index) => (
+                <li key={index}>{term}</li>
+              ))}
+            </ul>
+          </div>
         </div>
-
-      </div>
+      )}
 
       <div className={stylingBook.bookList}>
 

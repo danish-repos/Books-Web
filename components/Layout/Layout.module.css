@@ -157,3 +157,19 @@ input:checked + .slider:before {
   border-radius: 4px;
   cursor: pointer;
 }
+
+.signInButton {
+  background-color: #48494b;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.signInButton:hover {
+  background-color: #0056b3;
+}
+

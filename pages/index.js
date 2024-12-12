@@ -3,27 +3,39 @@ import styling from "../styles/General.module.css";
 import Book from "@/components/Book/book";
 import { useRouter } from "next/router";
 import { getAllAuthors, getAllGenres, getFeaturedBooks } from "@/helpers/api-util";
-import { getSession } from "next-auth/react";
+import { useState } from "react";
 
+// '/' page (shows all the featured books)
+export default function Home( {books, authors, genres}) {
 
-export default function Home(props) {
   const router = useRouter();
+  const [ loading , setLoading] = useState(false)
 
   const bookClicked = (id) => {
+    setLoading(true)
     router.push("/books/" + id);
   };
 
   const viewAllBooks = () => {
+    setLoading(true)
     router.push("/books");
   };
+
+  if (loading || books.lenght === 0 || genres.lenght === 0 || authors.lenght === 0) {  
+    return (
+      <div className={styling.loading}>
+        <div className={styling.spinner}></div>
+      </div>
+    );
+  }
 
   return (
     <>
       <header className={styling.heading}>Featured Books</header>
 
       <div className={stylingBook.bookList}>
-        {props.books.map((book) => (
-          <Book details={book} authors={props.authors} genres={props.genres}
+        {books.map((book) => (
+          <Book details={book} key={book.id} authors={authors} genres={genres}
             onClickBook={() => bookClicked(book.id)}
           />
         ))}
@@ -37,18 +49,7 @@ export default function Home(props) {
   );
 }
 
-export async function getServerSideProps(context) {
-
-  const session = await getSession({ req: context.req });
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/auth/signin",
-        permanent: false,
-      },
-    };
-  }
+export async function getServerSideProps() {
 
   const dataBooks = await getFeaturedBooks();
   const dataAuthors = await getAllAuthors();
@@ -62,7 +63,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      books: dataBooks,
+      books: dataBooks ,
       authors: dataAuthors,
       genres: dataGenres,
     },

@@ -1,3 +1,5 @@
+// Api-Util to contain all the api calling (except the user authentication)
+
 export async function getAllBooks(){
 
   try {
@@ -122,8 +124,8 @@ export async function getAuthorById(id){
       throw new Error(`Error: ${response.status} ${response.statusText}`);
     }
 
-    const author = await response.json();
-    return author;
+    const data = await response.json();
+    return data.author;
   } catch (error) {
     console.error(`Failed to fetch author with ID ${id}:`, error);
   }

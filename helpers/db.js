@@ -1,3 +1,4 @@
+// General DB connection file to re-use it
 import { MongoClient } from 'mongodb';
 
 const MONGODB_URI = process.env.MONGODB_URI;

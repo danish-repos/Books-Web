@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import styles from './sign-in.module.css';
 import Link from "next/link";
 
+// Authentication Sign-In page
 export default function SignIn() {
   const router = useRouter();
   const { data: session, status } = useSession();
@@ -31,11 +32,8 @@ export default function SignIn() {
         setError(result.error || "Authentication failed");
         return;
       }
-
-      console.log(result)
-      if (result.ok) {
-        router.push('/');
-      }
+      router.push('/');
+      
 
     } catch (err) {
       setError("An unexpected error occurred");

@@ -5,12 +5,14 @@ import { compare } from "bcryptjs";
 
 export const authOptions = {
   providers: [
+
     CredentialsProvider({
       name: "credentials",
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
+      // 'api/auth/signin' api (Sign-in Of the user)
       async authorize(credentials) {
         const { email, password } = credentials;
         
@@ -40,7 +42,9 @@ export const authOptions = {
     signIn: '/auth/signin',
   },
   secret: process.env.NEXTAUTH_SECRET,
+
   callbacks: {
+    // Also putting the username in the session for re-use in the layout
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
